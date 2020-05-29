@@ -1,0 +1,37 @@
+version: '2'
+services:
+    ubuntu-nginx-php:
+        image: ubuntu-nginx-php
+        ports: 
+            - "80:80"
+        volumes:
+            - ./application:/var/www/html
+        networks:
+            - app_net
+    redis:
+        image: redis:alpine
+        networks:
+            - app_net
+    db:
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_DATABASE: homestead
+            MYSQL_USER: homestead
+            MYSQL_PASSWORD: secret
+        volumes:
+            - data:/var/lib/mysql
+        networks:
+            - app_net
+networks:
+    app_net:
+        driver: "bridge"
+volumes:
+    data:
+        driver: "local"
+
+
+
+
+
+

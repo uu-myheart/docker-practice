@@ -1,0 +1,1 @@
+dockerrun-d\-p3306:3306\--namemysql\-eMYSQL_ALLOW_EMPTY_PASSWORD=yes\-vmysql:/var/lib/mysql\mysql:5.7dockerrun-d\-p3307:3307\--namemysql5.6\-eMYSQL_ALLOW_EMPTY_PASSWORD=yes\-vmysql5.6:/var/lib/mysql\mysql:5.6

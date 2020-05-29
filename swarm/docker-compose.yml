@@ -1,0 +1,58 @@
+version: "3"
+services:
+  nginx:
+    # build:
+      # context: .
+      # dockerfile: Dockerfile-nginx
+    image: swarm_nginx
+    ports:
+      - "4000:80"
+    networks:
+      - bridge
+    volumes:
+      - "/Users/baigali/sites/laravel:/app"
+    deploy:
+      mode: replicated
+      replicas: 4
+  php:
+    image: php72
+    networks:
+      - bridge
+    volumes: 
+      - "/Users/baigali/sites/laravel:/app"
+    deploy:
+      mode: global
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    networks:
+       - bridge
+    volumes:
+      - "mysql:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123457
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+  visualizer:
+    image: dockersamples/visualizer:stable
+    networks:
+      - bridge
+    ports:
+      - "8080:8080"
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: 
+          - node.role == manager
+volumes:
+  mysql:
+networks:
+  bridge:

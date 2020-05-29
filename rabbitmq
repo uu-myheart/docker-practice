@@ -1,0 +1,8 @@
+docker run -d\
+	--name=rabbitmq\
+	--network=my_bridge\
+	-p5672:5672\
+	-p15672:15672\
+	-eRABBITMQ_DEFAULT_USER=guest\
+	-eRABBITMQ_DEFAULT_PASS=guest\
+	rabbitmq:3.3.5-management-alpine
