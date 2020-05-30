@@ -1,0 +1,7 @@
+docker build -t uumyheart/my-ubuntu:latest .
+
+docker run -it \
+	--network my_bridge \
+	--name my-ubuntu \
+	my-ubuntu \
+	bash
